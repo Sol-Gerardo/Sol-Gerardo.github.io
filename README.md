@@ -1,1 +1,0 @@
-# Sol-Gerardo.github.io
