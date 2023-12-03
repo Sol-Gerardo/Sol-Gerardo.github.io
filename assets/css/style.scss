@@ -1,0 +1,68 @@
+---
+---
+
+@import "jekyll-theme-tactile";
+
+/* Style for the Projects title */
+#projects h1 {
+    font-size: 2em; /* Example size, adjust as needed */
+    /* Other styles for #projects h1 if needed */
+  }
+
+.center-about-me {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+/* Style for the About Me link */
+.center-about-me h2 {
+    font-size: 2em; /* Same size as #projects h1 */
+    display: inline-block; /* Only center the text, not the full width */
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  nav {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    font-size: 1.2em; /* Adjust the font size as needed */
+  }
+
+  .project {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* This spreads out the child elements */
+    margin-bottom: 40px;
+  }
+  
+  .project-info {
+    flex-basis: 70%;
+    padding-right: 20px; /* Add some space between the text and the image */
+  }
+  
+  .project-image {
+    flex-basis: 30%;
+    text-align: right; /* Aligns the image to the right */
+  }
+  
+  .project-image img {
+    max-width: 100px; /* Adjust this value as needed */
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  
+  .project-image img {
+    max-width: 100px; /* Adjust this value as needed */
+    height: 100px; /* Keeps the aspect ratio of the image */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  

@@ -2,8 +2,35 @@
 layout: default
 title: Gerardo Solis
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <div class="center-about-me">
+    <header class="page-header">
+      <h2><a href="about.html">About Me</a></h2>
+    </header>
+  </div>
+  <section id="projects">
+    <h1>Projects</h1>
+    <div class="project">
+      <div class="project-info">
+        <h2><a href="DLLInjection">DLL Injection</a></h2>
+        <p>A project focused on the technique of injecting a DLL into a running process to alter its functionality.</p>
+      </div>
+      <div class="project-image">
+        <a href="DLLInjection"><img src="{{ 'assets/img/DLLImage.png' | relative_url }}" alt="DLL Injection Project"></a>
+      </div>      
+    </div>
+    <!-- Repeat the above block for each project, with appropriate content and links -->
+  </section>
 
-<p>4th year CS major and CIS minor.<br>
-1st place National Centers of Academic Excellence in Cybersecurity regionals 2023.<br>
-16th place Cyberforce Cybersecurity of 105 schools 2023.</p>
-
+  <footer>
+    <!-- Footer content here -->
+  </footer>
+</body>
+</html>
