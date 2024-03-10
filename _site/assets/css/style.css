@@ -530,26 +530,26 @@ nav a {
 
 .project {
   display: flex;
-  align-items: center;
-  justify-content: space-between; /* This spreads out the child elements */
-  margin-bottom: 40px;
+  flex-direction: row; /* Ensure items are in a row */
+  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between; /* Space between the items, can adjust as needed */
+  margin-bottom: 40px; /* Space below each project */
+}
+
+.project-info, .project-image {
+  flex: 1; /* Allows each child to grow equally */
+  padding: 10px; /* Adds padding around each child */
 }
 
 .project-info {
-  flex-basis: 70%;
-  padding-right: 20px; /* Add some space between the text and the image */
+  max-width: 50%; /* Limits the width of the text block */
 }
 
 .project-image {
-  flex-basis: 30%;
-  text-align: right; /* Aligns the image to the right */
-}
-
-.project-image img {
-  max-width: 100px; /* Adjust this value as needed */
-  height: auto;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  max-width: 50%; /* Limits the width of the image block */
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
 }
 
 .project-image img {
