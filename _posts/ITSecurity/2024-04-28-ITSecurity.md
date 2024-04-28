@@ -6,4 +6,4 @@ permalink: /ITSecurity/
 categories: ITSecurity
 ---
 
-<a href="/ITSecurity/CORP/KIOSK/">KIOSK</a>
+[KIOSK]({{ site.baseurl }}{% link _posts/ITSecurity/CORP/2024-04-28-KIOSK.md %})
