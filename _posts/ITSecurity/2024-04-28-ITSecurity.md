@@ -28,7 +28,7 @@ The following are the steps we took throughout the engagement. The link to our r
 [TRAM]({{ 'ITSecurity/RND/TRAM/' | relative_url }})
 
 ## Report
-[Download-PDF]({{ '/assets/pdf/PNVI_FINALREPORT_Redacted.pdf' | relative_url }})
+[Iterative Report]({{ '/assets/pdf/PNVI_FINALREPORT_Redacted.pdf' | relative_url }})
 
 ---
 Special thank you to Alex, Dylan, Brice, Taylor and the Missa Team for making this competition possible, and giving students a simulation of what a real world engagement would be like.
