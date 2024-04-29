@@ -15,6 +15,8 @@
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="CA" />
 <meta property="og:locale" content="en_US" />
+<meta name="description" content="```bash Starting Nmap 7.95 ( https://nmap.org ) at 2024-04-23 07:36 Pacific Daylight Time NSE: Loaded 157 scripts for scanning. NSE: Script Pre-scanning. Initiating NSE at 07:36 Completed NSE at 07:36, 0.00s elapsed Initiating NSE at 07:36 Completed NSE at 07:36, 0.00s elapsed Initiating NSE at 07:36 Completed NSE at 07:36, 0.00s elapsed Initiating Ping Scan at 07:36 Scanning 192.168.20.25 [4 ports] Completed Ping Scan at 07:36, 0.02s elapsed (1 total hosts) Initiating Parallel DNS resolution of 1 host. at 07:36 Completed Parallel DNS resolution of 1 host. at 07:36, 0.00s elapsed Initiating SYN Stealth Scan at 07:36 Scanning 192.168.20.25 [65535 ports] Discovered open port 445/tcp on 192.168.20.25 Discovered open port 139/tcp on 192.168.20.25 Discovered open port 80/tcp on 192.168.20.25 Discovered open port 135/tcp on 192.168.20.25 Discovered open port 443/tcp on 192.168.20.25 Discovered open port 53/tcp on 192.168.20.25 Discovered open port 3269/tcp on 192.168.20.25 Discovered open port 49687/tcp on 192.168.20.25 Discovered open port 88/tcp on 192.168.20.25 Discovered open port 49665/tcp on 192.168.20.25 Discovered open port 49220/tcp on 192.168.20.25 Discovered open port 3268/tcp on 192.168.20.25 Discovered open port 49193/tcp on 192.168.20.25 Discovered open port 9389/tcp on 192.168.20.25 Discovered open port 49669/tcp on 192.168.20.25 Discovered open port 47001/tcp on 192.168.20.25 Discovered open port 49666/tcp on 192.168.20.25 Discovered open port 49686/tcp on 192.168.20.25 Discovered open port 49672/tcp on 192.168.20.25 Discovered open port 51028/tcp on 192.168.20.25 Discovered open port 49664/tcp on 192.168.20.25 Discovered open port 49194/tcp on 192.168.20.25 Discovered open port 389/tcp on 192.168.20.25 Discovered open port 636/tcp on 192.168.20.25 Discovered open port 593/tcp on 192.168.20.25 Discovered open port 5985/tcp on 192.168.20.25 Discovered open port 49690/tcp on 192.168.20.25 Discovered open port 464/tcp on 192.168.20.25 Completed SYN Stealth Scan at 07:36, 18.50s elapsed (65535 total ports) Initiating Service scan at 07:36 Scanning 28 services on 192.168.20.25 Service scan Timing: About 64.29% done; ETC: 07:37 (0:00:30 remaining) Completed Service scan at 07:37, 53.68s elapsed (28 services on 1 host) Initiating OS detection (try #1) against 192.168.20.25 Initiating Traceroute at 07:37 Completed Traceroute at 07:37, 0.01s elapsed Initiating Parallel DNS resolution of 2 hosts. at 07:37 Completed Parallel DNS resolution of 2 hosts. at 07:37, 0.00s elapsed NSE: Script scanning 192.168.20.25. Initiating NSE at 07:37 Completed NSE at 07:38, 64.81s elapsed Initiating NSE at 07:38 Completed NSE at 07:38, 7.13s elapsed Initiating NSE at 07:38 Completed NSE at 07:38, 0.01s elapsed Nmap scan report for 192.168.20.25 Host is up (0.00057s latency). Not shown: 65507 closed tcp ports (reset) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 80/tcp open http Microsoft IIS httpd 10.0 |http-server-header: Microsoft-IIS/10.0 |_http-title: IIS Windows Server | http-methods: | Supported Methods: OPTIONS TRACE GET HEAD POST | Potentially risky methods: TRACE 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2024-04-23 14:36:40Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 443/tcp open ssl/https? | ssl-cert: Subject: commonName=CA | Issuer: commonName=CA | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-17T23:30:07 | Not valid after: 2034-03-17T23:40:06 | MD5: 71b9:e9ef:24c5:7595:c99f:324a:a913:2a81 |_SHA-1: f0c6:d713:c023:cbd6:c6bb:f00f:1cf0:2128:ce84:fe4b |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | tls-alpn: | h2 | http/1.1 445/tcp open microsoft-ds Windows Server 2016 Datacenter 14393 microsoft-ds (workgroup: RND) 464/tcp open kpasswd5? 593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0 636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP) |_http-server-header: Microsoft-HTTPAPI/2.0 |_http-title: Not Found 9389/tcp open mc-nmf .NET Message Framing 47001/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP) |_http-server-header: Microsoft-HTTPAPI/2.0 |_http-title: Not Found 49193/tcp open msrpc Microsoft Windows RPC 49194/tcp open msrpc Microsoft Windows RPC 49220/tcp open msrpc Microsoft Windows RPC 49664/tcp open msrpc Microsoft Windows RPC 49665/tcp open msrpc Microsoft Windows RPC 49666/tcp open msrpc Microsoft Windows RPC 49669/tcp open msrpc Microsoft Windows RPC 49672/tcp open msrpc Microsoft Windows RPC 49686/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0 49687/tcp open msrpc Microsoft Windows RPC 49690/tcp open msrpc Microsoft Windows RPC 51028/tcp open msrpc Microsoft Windows RPC Device type: general purpose Running: Microsoft Windows 2016 OS CPE: cpe:/o:microsoft:windows_server_2016 OS details: Microsoft Windows Server 2016 Uptime guess: 10.353 days (since Fri Apr 12 23:10:18 2024) Network Distance: 2 hops TCP Sequence Prediction: Difficulty=265 (Good luck!) IP ID Sequence Generation: Incremental Service Info: Host: CA; OS: Windows; CPE: cpe:/o:microsoft:windows" />
+<meta property="og:description" content="```bash Starting Nmap 7.95 ( https://nmap.org ) at 2024-04-23 07:36 Pacific Daylight Time NSE: Loaded 157 scripts for scanning. NSE: Script Pre-scanning. Initiating NSE at 07:36 Completed NSE at 07:36, 0.00s elapsed Initiating NSE at 07:36 Completed NSE at 07:36, 0.00s elapsed Initiating NSE at 07:36 Completed NSE at 07:36, 0.00s elapsed Initiating Ping Scan at 07:36 Scanning 192.168.20.25 [4 ports] Completed Ping Scan at 07:36, 0.02s elapsed (1 total hosts) Initiating Parallel DNS resolution of 1 host. at 07:36 Completed Parallel DNS resolution of 1 host. at 07:36, 0.00s elapsed Initiating SYN Stealth Scan at 07:36 Scanning 192.168.20.25 [65535 ports] Discovered open port 445/tcp on 192.168.20.25 Discovered open port 139/tcp on 192.168.20.25 Discovered open port 80/tcp on 192.168.20.25 Discovered open port 135/tcp on 192.168.20.25 Discovered open port 443/tcp on 192.168.20.25 Discovered open port 53/tcp on 192.168.20.25 Discovered open port 3269/tcp on 192.168.20.25 Discovered open port 49687/tcp on 192.168.20.25 Discovered open port 88/tcp on 192.168.20.25 Discovered open port 49665/tcp on 192.168.20.25 Discovered open port 49220/tcp on 192.168.20.25 Discovered open port 3268/tcp on 192.168.20.25 Discovered open port 49193/tcp on 192.168.20.25 Discovered open port 9389/tcp on 192.168.20.25 Discovered open port 49669/tcp on 192.168.20.25 Discovered open port 47001/tcp on 192.168.20.25 Discovered open port 49666/tcp on 192.168.20.25 Discovered open port 49686/tcp on 192.168.20.25 Discovered open port 49672/tcp on 192.168.20.25 Discovered open port 51028/tcp on 192.168.20.25 Discovered open port 49664/tcp on 192.168.20.25 Discovered open port 49194/tcp on 192.168.20.25 Discovered open port 389/tcp on 192.168.20.25 Discovered open port 636/tcp on 192.168.20.25 Discovered open port 593/tcp on 192.168.20.25 Discovered open port 5985/tcp on 192.168.20.25 Discovered open port 49690/tcp on 192.168.20.25 Discovered open port 464/tcp on 192.168.20.25 Completed SYN Stealth Scan at 07:36, 18.50s elapsed (65535 total ports) Initiating Service scan at 07:36 Scanning 28 services on 192.168.20.25 Service scan Timing: About 64.29% done; ETC: 07:37 (0:00:30 remaining) Completed Service scan at 07:37, 53.68s elapsed (28 services on 1 host) Initiating OS detection (try #1) against 192.168.20.25 Initiating Traceroute at 07:37 Completed Traceroute at 07:37, 0.01s elapsed Initiating Parallel DNS resolution of 2 hosts. at 07:37 Completed Parallel DNS resolution of 2 hosts. at 07:37, 0.00s elapsed NSE: Script scanning 192.168.20.25. Initiating NSE at 07:37 Completed NSE at 07:38, 64.81s elapsed Initiating NSE at 07:38 Completed NSE at 07:38, 7.13s elapsed Initiating NSE at 07:38 Completed NSE at 07:38, 0.01s elapsed Nmap scan report for 192.168.20.25 Host is up (0.00057s latency). Not shown: 65507 closed tcp ports (reset) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 80/tcp open http Microsoft IIS httpd 10.0 |http-server-header: Microsoft-IIS/10.0 |_http-title: IIS Windows Server | http-methods: | Supported Methods: OPTIONS TRACE GET HEAD POST | Potentially risky methods: TRACE 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2024-04-23 14:36:40Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 443/tcp open ssl/https? | ssl-cert: Subject: commonName=CA | Issuer: commonName=CA | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-17T23:30:07 | Not valid after: 2034-03-17T23:40:06 | MD5: 71b9:e9ef:24c5:7595:c99f:324a:a913:2a81 |_SHA-1: f0c6:d713:c023:cbd6:c6bb:f00f:1cf0:2128:ce84:fe4b |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | tls-alpn: | h2 | http/1.1 445/tcp open microsoft-ds Windows Server 2016 Datacenter 14393 microsoft-ds (workgroup: RND) 464/tcp open kpasswd5? 593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0 636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP) |_http-server-header: Microsoft-HTTPAPI/2.0 |_http-title: Not Found 9389/tcp open mc-nmf .NET Message Framing 47001/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP) |_http-server-header: Microsoft-HTTPAPI/2.0 |_http-title: Not Found 49193/tcp open msrpc Microsoft Windows RPC 49194/tcp open msrpc Microsoft Windows RPC 49220/tcp open msrpc Microsoft Windows RPC 49664/tcp open msrpc Microsoft Windows RPC 49665/tcp open msrpc Microsoft Windows RPC 49666/tcp open msrpc Microsoft Windows RPC 49669/tcp open msrpc Microsoft Windows RPC 49672/tcp open msrpc Microsoft Windows RPC 49686/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0 49687/tcp open msrpc Microsoft Windows RPC 49690/tcp open msrpc Microsoft Windows RPC 51028/tcp open msrpc Microsoft Windows RPC Device type: general purpose Running: Microsoft Windows 2016 OS CPE: cpe:/o:microsoft:windows_server_2016 OS details: Microsoft Windows Server 2016 Uptime guess: 10.353 days (since Fri Apr 12 23:10:18 2024) Network Distance: 2 hops TCP Sequence Prediction: Difficulty=265 (Good luck!) IP ID Sequence Generation: Incremental Service Info: Host: CA; OS: Windows; CPE: cpe:/o:microsoft:windows" />
 <link rel="canonical" href="http://localhost:4000/ITSecurity/RND/CA/" />
 <meta property="og:url" content="http://localhost:4000/ITSecurity/RND/CA/" />
 <meta property="og:site_name" content="Gerardo’s Blog" />
@@ -23,7 +25,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="CA" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-04-28T00:00:00-07:00","datePublished":"2024-04-28T00:00:00-07:00","headline":"CA","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/ITSecurity/RND/CA/"},"url":"http://localhost:4000/ITSecurity/RND/CA/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-04-28T00:00:00-07:00","datePublished":"2024-04-28T00:00:00-07:00","description":"```bash Starting Nmap 7.95 ( https://nmap.org ) at 2024-04-23 07:36 Pacific Daylight Time NSE: Loaded 157 scripts for scanning. NSE: Script Pre-scanning. Initiating NSE at 07:36 Completed NSE at 07:36, 0.00s elapsed Initiating NSE at 07:36 Completed NSE at 07:36, 0.00s elapsed Initiating NSE at 07:36 Completed NSE at 07:36, 0.00s elapsed Initiating Ping Scan at 07:36 Scanning 192.168.20.25 [4 ports] Completed Ping Scan at 07:36, 0.02s elapsed (1 total hosts) Initiating Parallel DNS resolution of 1 host. at 07:36 Completed Parallel DNS resolution of 1 host. at 07:36, 0.00s elapsed Initiating SYN Stealth Scan at 07:36 Scanning 192.168.20.25 [65535 ports] Discovered open port 445/tcp on 192.168.20.25 Discovered open port 139/tcp on 192.168.20.25 Discovered open port 80/tcp on 192.168.20.25 Discovered open port 135/tcp on 192.168.20.25 Discovered open port 443/tcp on 192.168.20.25 Discovered open port 53/tcp on 192.168.20.25 Discovered open port 3269/tcp on 192.168.20.25 Discovered open port 49687/tcp on 192.168.20.25 Discovered open port 88/tcp on 192.168.20.25 Discovered open port 49665/tcp on 192.168.20.25 Discovered open port 49220/tcp on 192.168.20.25 Discovered open port 3268/tcp on 192.168.20.25 Discovered open port 49193/tcp on 192.168.20.25 Discovered open port 9389/tcp on 192.168.20.25 Discovered open port 49669/tcp on 192.168.20.25 Discovered open port 47001/tcp on 192.168.20.25 Discovered open port 49666/tcp on 192.168.20.25 Discovered open port 49686/tcp on 192.168.20.25 Discovered open port 49672/tcp on 192.168.20.25 Discovered open port 51028/tcp on 192.168.20.25 Discovered open port 49664/tcp on 192.168.20.25 Discovered open port 49194/tcp on 192.168.20.25 Discovered open port 389/tcp on 192.168.20.25 Discovered open port 636/tcp on 192.168.20.25 Discovered open port 593/tcp on 192.168.20.25 Discovered open port 5985/tcp on 192.168.20.25 Discovered open port 49690/tcp on 192.168.20.25 Discovered open port 464/tcp on 192.168.20.25 Completed SYN Stealth Scan at 07:36, 18.50s elapsed (65535 total ports) Initiating Service scan at 07:36 Scanning 28 services on 192.168.20.25 Service scan Timing: About 64.29% done; ETC: 07:37 (0:00:30 remaining) Completed Service scan at 07:37, 53.68s elapsed (28 services on 1 host) Initiating OS detection (try #1) against 192.168.20.25 Initiating Traceroute at 07:37 Completed Traceroute at 07:37, 0.01s elapsed Initiating Parallel DNS resolution of 2 hosts. at 07:37 Completed Parallel DNS resolution of 2 hosts. at 07:37, 0.00s elapsed NSE: Script scanning 192.168.20.25. Initiating NSE at 07:37 Completed NSE at 07:38, 64.81s elapsed Initiating NSE at 07:38 Completed NSE at 07:38, 7.13s elapsed Initiating NSE at 07:38 Completed NSE at 07:38, 0.01s elapsed Nmap scan report for 192.168.20.25 Host is up (0.00057s latency). Not shown: 65507 closed tcp ports (reset) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 80/tcp open http Microsoft IIS httpd 10.0 |http-server-header: Microsoft-IIS/10.0 |_http-title: IIS Windows Server | http-methods: | Supported Methods: OPTIONS TRACE GET HEAD POST | Potentially risky methods: TRACE 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2024-04-23 14:36:40Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 443/tcp open ssl/https? | ssl-cert: Subject: commonName=CA | Issuer: commonName=CA | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-17T23:30:07 | Not valid after: 2034-03-17T23:40:06 | MD5: 71b9:e9ef:24c5:7595:c99f:324a:a913:2a81 |_SHA-1: f0c6:d713:c023:cbd6:c6bb:f00f:1cf0:2128:ce84:fe4b |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | tls-alpn: | h2 | http/1.1 445/tcp open microsoft-ds Windows Server 2016 Datacenter 14393 microsoft-ds (workgroup: RND) 464/tcp open kpasswd5? 593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0 636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: RND.PNVI.LAB, Site: Default-First-Site-Name) |_ssl-date: 2024-04-23T14:38:34+00:00; 0s from scanner time. | ssl-cert: Subject: commonName=CA.RND.PNVI.LAB | Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:CA.RND.PNVI.LAB | Issuer: commonName=ca | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-03-28T00:26:07 | Not valid after: 2025-03-28T00:26:07 | MD5: 0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76 |_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea 5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP) |_http-server-header: Microsoft-HTTPAPI/2.0 |_http-title: Not Found 9389/tcp open mc-nmf .NET Message Framing 47001/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP) |_http-server-header: Microsoft-HTTPAPI/2.0 |_http-title: Not Found 49193/tcp open msrpc Microsoft Windows RPC 49194/tcp open msrpc Microsoft Windows RPC 49220/tcp open msrpc Microsoft Windows RPC 49664/tcp open msrpc Microsoft Windows RPC 49665/tcp open msrpc Microsoft Windows RPC 49666/tcp open msrpc Microsoft Windows RPC 49669/tcp open msrpc Microsoft Windows RPC 49672/tcp open msrpc Microsoft Windows RPC 49686/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0 49687/tcp open msrpc Microsoft Windows RPC 49690/tcp open msrpc Microsoft Windows RPC 51028/tcp open msrpc Microsoft Windows RPC Device type: general purpose Running: Microsoft Windows 2016 OS CPE: cpe:/o:microsoft:windows_server_2016 OS details: Microsoft Windows Server 2016 Uptime guess: 10.353 days (since Fri Apr 12 23:10:18 2024) Network Distance: 2 hops TCP Sequence Prediction: Difficulty=265 (Good luck!) IP ID Sequence Generation: Incremental Service Info: Host: CA; OS: Windows; CPE: cpe:/o:microsoft:windows","headline":"CA","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/ITSecurity/RND/CA/"},"url":"http://localhost:4000/ITSecurity/RND/CA/"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
@@ -49,7 +51,214 @@
         </header>
         <hr>
         <section id="main_content">
-          
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting Nmap 7.95 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2024-04-23 07:36 Pacific Daylight Time
+NSE: Loaded 157 scripts <span class="k">for </span>scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 07:36
+Completed NSE at 07:36, 0.00s elapsed
+Initiating NSE at 07:36
+Completed NSE at 07:36, 0.00s elapsed
+Initiating NSE at 07:36
+Completed NSE at 07:36, 0.00s elapsed
+Initiating Ping Scan at 07:36
+Scanning 192.168.20.25 <span class="o">[</span>4 ports]
+Completed Ping Scan at 07:36, 0.02s elapsed <span class="o">(</span>1 total hosts<span class="o">)</span>
+Initiating Parallel DNS resolution of 1 host. at 07:36
+Completed Parallel DNS resolution of 1 host. at 07:36, 0.00s elapsed
+Initiating SYN Stealth Scan at 07:36
+Scanning 192.168.20.25 <span class="o">[</span>65535 ports]
+Discovered open port 445/tcp on 192.168.20.25
+Discovered open port 139/tcp on 192.168.20.25
+Discovered open port 80/tcp on 192.168.20.25
+Discovered open port 135/tcp on 192.168.20.25
+Discovered open port 443/tcp on 192.168.20.25
+Discovered open port 53/tcp on 192.168.20.25
+Discovered open port 3269/tcp on 192.168.20.25
+Discovered open port 49687/tcp on 192.168.20.25
+Discovered open port 88/tcp on 192.168.20.25
+Discovered open port 49665/tcp on 192.168.20.25
+Discovered open port 49220/tcp on 192.168.20.25
+Discovered open port 3268/tcp on 192.168.20.25
+Discovered open port 49193/tcp on 192.168.20.25
+Discovered open port 9389/tcp on 192.168.20.25
+Discovered open port 49669/tcp on 192.168.20.25
+Discovered open port 47001/tcp on 192.168.20.25
+Discovered open port 49666/tcp on 192.168.20.25
+Discovered open port 49686/tcp on 192.168.20.25
+Discovered open port 49672/tcp on 192.168.20.25
+Discovered open port 51028/tcp on 192.168.20.25
+Discovered open port 49664/tcp on 192.168.20.25
+Discovered open port 49194/tcp on 192.168.20.25
+Discovered open port 389/tcp on 192.168.20.25
+Discovered open port 636/tcp on 192.168.20.25
+Discovered open port 593/tcp on 192.168.20.25
+Discovered open port 5985/tcp on 192.168.20.25
+Discovered open port 49690/tcp on 192.168.20.25
+Discovered open port 464/tcp on 192.168.20.25
+Completed SYN Stealth Scan at 07:36, 18.50s elapsed <span class="o">(</span>65535 total ports<span class="o">)</span>
+Initiating Service scan at 07:36
+Scanning 28 services on 192.168.20.25
+Service scan Timing: About 64.29% <span class="k">done</span><span class="p">;</span> ETC: 07:37 <span class="o">(</span>0:00:30 remaining<span class="o">)</span>
+Completed Service scan at 07:37, 53.68s elapsed <span class="o">(</span>28 services on 1 host<span class="o">)</span>
+Initiating OS detection <span class="o">(</span>try <span class="c">#1) against 192.168.20.25</span>
+Initiating Traceroute at 07:37
+Completed Traceroute at 07:37, 0.01s elapsed
+Initiating Parallel DNS resolution of 2 hosts. at 07:37
+Completed Parallel DNS resolution of 2 hosts. at 07:37, 0.00s elapsed
+NSE: Script scanning 192.168.20.25.
+Initiating NSE at 07:37
+Completed NSE at 07:38, 64.81s elapsed
+Initiating NSE at 07:38
+Completed NSE at 07:38, 7.13s elapsed
+Initiating NSE at 07:38
+Completed NSE at 07:38, 0.01s elapsed
+Nmap scan report <span class="k">for </span>192.168.20.25
+Host is up <span class="o">(</span>0.00057s latency<span class="o">)</span><span class="nb">.</span>
+Not shown: 65507 closed tcp ports <span class="o">(</span>reset<span class="o">)</span>
+PORT      STATE SERVICE      VERSION
+53/tcp    open  domain       Simple DNS Plus
+80/tcp    open  http         Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: IIS Windows Server
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+88/tcp    open  kerberos-sec Microsoft Windows Kerberos <span class="o">(</span>server <span class="nb">time</span>: 2024-04-23 14:36:40Z<span class="o">)</span>
+135/tcp   open  msrpc        Microsoft Windows RPC
+139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+389/tcp   open  ldap         Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: RND.PNVI.LAB, Site: Default-First-Site-Name<span class="o">)</span>
+|_ssl-date: 2024-04-23T14:38:34+00:00<span class="p">;</span> 0s from scanner time.
+| ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>CA.RND.PNVI.LAB
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt<span class="p">;</span>unsupported&amp;gt<span class="p">;</span>, DNS:CA.RND.PNVI.LAB
+| Issuer: <span class="nv">commonName</span><span class="o">=</span>ca
+| Public Key <span class="nb">type</span>: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2024-03-28T00:26:07
+| Not valid after:  2025-03-28T00:26:07
+| MD5:   0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76
+|_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea
+443/tcp   open  ssl/https?
+| ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>CA
+| Issuer: <span class="nv">commonName</span><span class="o">=</span>CA
+| Public Key <span class="nb">type</span>: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2024-03-17T23:30:07
+| Not valid after:  2034-03-17T23:40:06
+| MD5:   71b9:e9ef:24c5:7595:c99f:324a:a913:2a81
+|_SHA-1: f0c6:d713:c023:cbd6:c6bb:f00f:1cf0:2128:ce84:fe4b
+|_ssl-date: 2024-04-23T14:38:34+00:00<span class="p">;</span> 0s from scanner time.
+| tls-alpn: 
+|   h2
+|_  http/1.1
+445/tcp   open  microsoft-ds Windows Server 2016 Datacenter 14393 microsoft-ds <span class="o">(</span>workgroup: RND<span class="o">)</span>
+464/tcp   open  kpasswd5?
+593/tcp   open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+636/tcp   open  ssl/ldap     Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: RND.PNVI.LAB, Site: Default-First-Site-Name<span class="o">)</span>
+|_ssl-date: 2024-04-23T14:38:34+00:00<span class="p">;</span> 0s from scanner time.
+| ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>CA.RND.PNVI.LAB
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt<span class="p">;</span>unsupported&amp;gt<span class="p">;</span>, DNS:CA.RND.PNVI.LAB
+| Issuer: <span class="nv">commonName</span><span class="o">=</span>ca
+| Public Key <span class="nb">type</span>: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2024-03-28T00:26:07
+| Not valid after:  2025-03-28T00:26:07
+| MD5:   0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76
+|_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea
+3268/tcp  open  ldap         Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: RND.PNVI.LAB, Site: Default-First-Site-Name<span class="o">)</span>
+|_ssl-date: 2024-04-23T14:38:34+00:00<span class="p">;</span> 0s from scanner time.
+| ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>CA.RND.PNVI.LAB
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt<span class="p">;</span>unsupported&amp;gt<span class="p">;</span>, DNS:CA.RND.PNVI.LAB
+| Issuer: <span class="nv">commonName</span><span class="o">=</span>ca
+| Public Key <span class="nb">type</span>: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2024-03-28T00:26:07
+| Not valid after:  2025-03-28T00:26:07
+| MD5:   0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76
+|_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea
+3269/tcp  open  ssl/ldap     Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: RND.PNVI.LAB, Site: Default-First-Site-Name<span class="o">)</span>
+|_ssl-date: 2024-04-23T14:38:34+00:00<span class="p">;</span> 0s from scanner time.
+| ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>CA.RND.PNVI.LAB
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt<span class="p">;</span>unsupported&amp;gt<span class="p">;</span>, DNS:CA.RND.PNVI.LAB
+| Issuer: <span class="nv">commonName</span><span class="o">=</span>ca
+| Public Key <span class="nb">type</span>: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2024-03-28T00:26:07
+| Not valid after:  2025-03-28T00:26:07
+| MD5:   0c7b:a1b6:355c:85cd:e19c:12f7:8f44:ce76
+|_SHA-1: 6bc0:51bc:bdc7:720e:592b:0cda:5a0a:bc08:14fc:26ea
+5985/tcp  open  http         Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp  open  mc-nmf       .NET Message Framing
+47001/tcp open  http         Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+49193/tcp open  msrpc        Microsoft Windows RPC
+49194/tcp open  msrpc        Microsoft Windows RPC
+49220/tcp open  msrpc        Microsoft Windows RPC
+49664/tcp open  msrpc        Microsoft Windows RPC
+49665/tcp open  msrpc        Microsoft Windows RPC
+49666/tcp open  msrpc        Microsoft Windows RPC
+49669/tcp open  msrpc        Microsoft Windows RPC
+49672/tcp open  msrpc        Microsoft Windows RPC
+49686/tcp open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+49687/tcp open  msrpc        Microsoft Windows RPC
+49690/tcp open  msrpc        Microsoft Windows RPC
+51028/tcp open  msrpc        Microsoft Windows RPC
+Device <span class="nb">type</span>: general purpose
+Running: Microsoft Windows 2016
+OS CPE: cpe:/o:microsoft:windows_server_2016
+OS details: Microsoft Windows Server 2016
+Uptime guess: 10.353 days <span class="o">(</span>since Fri Apr 12 23:10:18 2024<span class="o">)</span>
+Network Distance: 2 hops
+TCP Sequence Prediction: <span class="nv">Difficulty</span><span class="o">=</span>265 <span class="o">(</span>Good luck!<span class="o">)</span>
+IP ID Sequence Generation: Incremental
+Service Info: Host: CA<span class="p">;</span> OS: Windows<span class="p">;</span> CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 52m30s, deviation: 2h28m31s, median: 0s
+| smb2-security-mode: 
+|   3:1:1: 
+|_    Message signing enabled and required
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: required
+| smb2-time: 
+|   <span class="nb">date</span>: 2024-04-23T14:37:30
+|_  start_date: 2024-04-13T06:10:37
+| smb-os-discovery: 
+|   OS: Windows Server 2016 Datacenter 14393 <span class="o">(</span>Windows Server 2016 Datacenter 6.3<span class="o">)</span>
+|   Computer name: CA
+|   NetBIOS computer name: CA<span class="se">\x</span>00
+|   Domain name: RND.PNVI.LAB
+|   Forest name: RND.PNVI.LAB
+|   FQDN: CA.RND.PNVI.LAB
+|_  System <span class="nb">time</span>: 2024-04-23T07:37:34-07:00
+
+TRACEROUTE <span class="o">(</span>using port 23/tcp<span class="o">)</span>
+HOP RTT     ADDRESS
+1   0.00 ms 192.168.0.1
+2   1.00 ms 192.168.20.25
+
+NSE: Script Post-scanning.
+Initiating NSE at 07:38
+Completed NSE at 07:38, 0.00s elapsed
+Initiating NSE at 07:38
+Completed NSE at 07:38, 0.00s elapsed
+Initiating NSE at 07:38
+Completed NSE at 07:38, 0.00s elapsed
+Read data files from: C:<span class="se">\P</span>rogram Files <span class="o">(</span>x86<span class="o">)</span><span class="se">\N</span>map
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="nb">.</span>
+Nmap <span class="k">done</span>: 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>146.49 seconds
+Raw packets sent: 66926 <span class="o">(</span>2.946MB<span class="o">)</span> | Rcvd: 65557 <span class="o">(</span>2.623MB<span class="o">)</span>
+</code></pre></div></div>
 
         </section>
 
